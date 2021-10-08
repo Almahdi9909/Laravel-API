@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TransactionResource;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class TranscationController extends Controller
+class TraController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class TranscationController extends Controller
      */
     public function index()
     {
-        //
+        return TransactionResource::collection(Transaction::with('category')->get());
     }
 
     /**
@@ -34,9 +36,9 @@ class TranscationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        //
+        return new TransactionResource($transaction);
     }
 
     /**
