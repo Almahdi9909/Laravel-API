@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get('categories',
+//     [\App\Http\Controllers\Api\CategoryControlller::class , 'index']
+// );
+// Route::get('categories/{category}',
+//     [\App\Http\Controllers\Api\CategoryControlller::class , 'show']
+// );
+
+/*
+    ** include only 5 insrated of 7 methods
+*/ 
+Route::apiResource('categories', \App\Http\Controllers\Api\CategoryControlller::class);
