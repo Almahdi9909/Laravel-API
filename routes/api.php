@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     ** include only 5 insrated of 7 methods
 */ 
 Route::apiResource('categories', \App\Http\Controllers\Api\CategoryControlller::class);
+Route::apiResource('transactions', \App\Http\Controllers\Api\TraController::class );
