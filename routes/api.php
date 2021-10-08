@@ -26,8 +26,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     [\App\Http\Controllers\Api\CategoryControlller::class , 'show']
 // );
 
-/*
-    ** include only 5 insrated of 7 methods
-*/ 
-Route::apiResource('categories', \App\Http\Controllers\Api\CategoryControlller::class);
-Route::apiResource('transactions', \App\Http\Controllers\Api\TraController::class );
+// Route::middleware('auth:sanctum')->group(function(){
+    
+//     /*
+//         ** include only 5 insrated of 7 methods
+//     */ 
+//     Route::apiResource('categories', \App\Http\Controllers\Api\CategoryControlller::class);
+//     Route::apiResource('transactions', \App\Http\Controllers\Api\TraController::class );
+// });
+
+Route::group(['middleware'=>'auth:sanctum'] , function(){
+    
+    /*
+        ** include only 5 insrated of 7 methods
+    */ 
+    Route::apiResource('categories', \App\Http\Controllers\Api\CategoryControlller::class);
+    Route::apiResource('transactions', \App\Http\Controllers\Api\TraController::class );
+});
