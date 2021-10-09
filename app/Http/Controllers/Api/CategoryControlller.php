@@ -30,8 +30,11 @@ class CategoryControlller extends Controller
     public function store(StoreCategoryRequest $request)
     {
         // Category::create($this->validateCatgeory());
-        $category = new CategoryResource(Category::create($request->validated()));
-        return $category;
+        // $category = new CategoryResource(Category::create($request->validated() + ['user_id' => auth()->id ]));
+        //  u can set the attributes at the time of insertion as well from the user model 
+        // or better option is to use the below code 
+        $category = auth()->user()->category()->create($request->validated());
+        return new CategoryResource($category);
     }
 
     /**
