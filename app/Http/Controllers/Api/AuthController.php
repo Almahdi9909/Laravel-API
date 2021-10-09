@@ -35,7 +35,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if($user)
-            $user->tonkes()->delete();
+            $user->tokens()->delete();
 
             return response()->noContent();
     }
