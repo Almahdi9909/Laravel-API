@@ -29,8 +29,16 @@ class TraController extends Controller
     public function store(TransactionRequest $request)
     {
         // dd($request->all());
-        $transaction = new TransactionResource(Transaction::create($request->validated()));
-        return $transaction;
+        // $transaction = new TransactionResource(Transaction::create($request->validated()));
+        // return $transaction;
+
+        
+            // Category::create($this->validateCatgeory());
+            // $category = new CategoryResource(Category::create($request->validated() + ['user_id' => auth()->id ]));
+            //  u can set the attributes at the time of insertion as well from the user model 
+            // or better option is to use the below code 
+            $transaction = auth()->user()->transaction()->create($request->validated());
+            return new TransactionResource($transaction);
     }
 
     /**
