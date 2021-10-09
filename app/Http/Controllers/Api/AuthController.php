@@ -6,12 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
 
     public function register(Request $request)
     {
+        $request->validate([
+            'name'          =>      'required | string | max:255',
+            'email'         =>      'required | email | max:255 | unique:users',
+            'password'      =>      ['required' , 'confirmed' , Password::default()],
+            'device_name'   =>      'required'
+        ]);
         
     }
     public function logout(Request $request)
