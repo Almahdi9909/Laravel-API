@@ -12,4 +12,9 @@ class Category extends Model
     // protected $table = 'categories' ;
 
     protected $fillable = ['name'];
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

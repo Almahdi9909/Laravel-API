@@ -18,7 +18,7 @@ class CategoryControlller extends Controller
      */
     public function index()
     {
-        return \App\Http\Resources\CategoryResource::collection(Category::all());
+        return \App\Http\Resources\CategoryResource::collection(Category::all()->load('transaction'));
     }
 
     /**
@@ -83,4 +83,5 @@ class CategoryControlller extends Controller
             'name' => 'required',
         ]);
     }
+
 }
