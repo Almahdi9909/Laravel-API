@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class AuthController extends Controller
 {
@@ -16,14 +17,27 @@ class AuthController extends Controller
         $request->validate([
             'name'          =>      'required | string | max:255',
             'email'         =>      'required | email | max:255 | unique:users',
-            'password'      =>      ['required' , 'confirmed' , Password::default()],
+            'password'      =>      ['required' , 'confirmed' , RulesPassword::default()],
             'device_name'   =>      'required'
         ]);
+
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        return $user->createToken($request->device_name)->plainTextToken;
         
     }
     public function logout(Request $request)
     {
+        $user = User::where('email', $request->email)->first();
 
+        if($user)
+            $user->tonkes()->delete();
+
+            return response()->noContent();
     }
     public function login(Request $request)
     {
