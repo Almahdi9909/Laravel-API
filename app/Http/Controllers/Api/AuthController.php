@@ -55,14 +55,8 @@ class AuthController extends Controller
             ]);
         }
     
-        $token = [
-            'token' => $user->createToken($request->device_name)->plainTextToken,
-            'roles' => [
-                'admin' => [
-                    'permissions' => ['edit', 'delete' , 'create']
-                ]
-            ]
-        ];
-        return $token;
+
+            return $user->createToken($request->device_name)->plainTextToken;
+        
     }
 }
